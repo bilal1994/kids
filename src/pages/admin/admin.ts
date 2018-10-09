@@ -4,12 +4,14 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { HomePage } from '../home/home';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+
+// import { LocalNotifications } from '@ionic-native/local-notifications';
 import { FCM } from '@ionic-native/fcm';
 import { SignUpPage } from '../sign-up/sign-up';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth} from '@angular/fire/auth';
 import { ShowPage } from '../show/show';
 import { AddNewPage } from '../add-new/add-new';
+// import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @IonicPage()
 @Component({
@@ -23,7 +25,7 @@ export class AdminPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
   public myAuth: AuthServiceProvider,
-public alertCtrl: AlertController,private fcm:FCM ) {
+public alertCtrl: AlertController,private fcm:FCM,public authi : AngularFireAuth ) {
   }
 
   firebaseMessage(){
@@ -52,7 +54,7 @@ public alertCtrl: AlertController,private fcm:FCM ) {
   console.log('goBackIsClicked')
 }
 
-  notice(){
+  /*notice(){
     this.notify.schedule({
       id: 1,
       text: 'hi from admin',
@@ -61,6 +63,7 @@ public alertCtrl: AlertController,private fcm:FCM ) {
       // data: { secret: this.addkid }
     });
   }
+  */
 
   add(){
     if (this.authi.auth.currentUser) {
@@ -71,8 +74,7 @@ public alertCtrl: AlertController,private fcm:FCM ) {
       console.log("no auth")
       this.showAlert()
 
-    }
-  }
+    }  }
 
   showAlert() {
     const alert = this.alertCtrl.create({

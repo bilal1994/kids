@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 
 
@@ -7,25 +7,25 @@ import * as firebase from 'firebase/app';
 export class AuthServiceProvider {
   private user : firebase.User
 
-  constructor(public myAuth : AngularFireAuth) {
+  constructor(public db : AngularFireAuth) {
     console.log('Hello AuthServiceProvider Provider');
 
-    myAuth.authState.subscribe(assign => {
+    db.authState.subscribe(assign => {
       this.user = assign
     })
   }
 
   SignUp(create){
     console.log("sign Up")
-    return this.myAuth.auth.createUserWithEmailAndPassword(create.email, create.password);
+    return this.db.auth.createUserWithEmailAndPassword(create.email, create.password);
   }
 
   SignIn(create){
     console.log("sign in")
-      return this.myAuth.auth.signInWithEmailAndPassword(create.email, create.password);    
+      return this.db.auth.signInWithEmailAndPassword(create.email, create.password);    
   }
 
   signOut(){
-    return this.myAuth.auth.signOut()
+    return this.db.auth.signOut()
   }
 }
